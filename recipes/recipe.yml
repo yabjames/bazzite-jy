@@ -39,7 +39,7 @@ modules:
           - org.gnome.Loupe
       - scope: user # Also add Flathub user repo, but no user packages
 
-   - type: gnome-extensions
+  - type: gnome-extensions
     install:
       - 2645 # Brightness control using ddcutil
 
