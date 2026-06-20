@@ -6,8 +6,8 @@ name: bazzite-jy
 description: This is my personal OS image.
 
 # the base image to build on top of (FROM) and the version tag to use
-base-image: ghcr.io/ublue-os/silverblue-main
-image-version: 42 # latest is also supported if you want new updates ASAP
+base-image: ghcr.io/ublue-os/bazzite-gnome-nvidia
+image-version: stable
 
 # module configuration, executed in order
 # you can include multiple instances of the same module
@@ -18,13 +18,10 @@ modules:
         destination: / # copies files/system/* (* means everything inside it) into your image's root folder /
 
   - type: dnf
-    repos:
-      copr:
-        - atim/starship
     install:
       packages:
-        - micro
-        - starship
+        - vim
+        - ddcutil
     remove:
       packages:
         # example: removing firefox (in favor of the flatpak)
@@ -41,5 +38,9 @@ modules:
           - org.mozilla.firefox
           - org.gnome.Loupe
       - scope: user # Also add Flathub user repo, but no user packages
+
+   - type: gnome-extensions
+    install:
+      - 2645 # Brightness control using ddcutil
 
   - type: signing # this sets up the proper policy & signing files for signed images to work fully
